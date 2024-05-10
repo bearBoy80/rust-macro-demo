@@ -14,3 +14,13 @@ macro_rules! my_vec {
         }
     };
 }
+
+#[macro_export]
+macro_rules! my_try {
+    ($expr:expr) => {
+        match $expr {
+            Ok(val) => val,
+            Err(err) => return Err(err.into()),
+        }
+    };
+}
