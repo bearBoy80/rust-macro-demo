@@ -1,22 +1,26 @@
-use anyhow::Result;
-use rust_marco_demo::{my_try, my_vec};
+use rust_marco_demo::EnumFrom;
 
-fn main() ->Result<()> {
-    println!("Hello, world!");
-    let vec:Vec<i32> = my_vec!(1,2,3,4,5,6,7,8,9,10);
-    println!("{:?}",vec);
-    let vec1 = my_vec!(1;2);
-    println!("{:?}",vec1);
-    my_try!(foo("str"));
-    Ok(())
+fn main() {
+    let left :Direction = 120.into();
+    let up :Direction = DirectionUp::new(100).into();
+    println!("left {:?},up :{:?}",left,up);
 }
-fn foo(str: &str) ->Result<String> {
-    if str.eq("hello world") {
-        Ok(str.to_owned())
-    }else{
-        Err(anyhow::anyhow!(" not expecting string"))
+#[derive(Debug,EnumFrom)]
+#[allow(dead_code)]
+enum Direction {
+    Up(DirectionUp),
+    Down,
+    Left(i32),
+    Right { a: i32 },
+}
+#[derive(Debug)]
+#[allow(dead_code)]
+struct DirectionUp {
+    speed: i32,
+}
+#[allow(dead_code)]
+impl DirectionUp {
+    fn new(speed: i32) -> Self {
+        Self { speed }
     }
-}
-fn foo1(str: &str) -> core::result::Result<String, &'static str> {
-    Err("expected string")
 }
