@@ -11,4 +11,6 @@ custom!(...)
 - 类函数宏看起来像函数不过作用于作为参数传递的token
 #[CustomAttribute]
 
-
+## demo
+自定义声明式宏，[见代码](./examples/my-try.rs)
+自定义derive宏,[derive_enum_from_daring](./lib.rs)

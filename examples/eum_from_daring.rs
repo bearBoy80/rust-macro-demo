@@ -1,11 +1,11 @@
-use rust_marco_demo::EnumFrom;
+use rust_marco_demo::EnumFromDaring;
 
 fn main() {
     let left: Direction = 120.into();
     let up: Direction = DirectionUp::new(100).into();
     println!("left {:?},up :{:?}", left, up);
 }
-#[derive(Debug, EnumFrom)]
+#[derive(Debug, EnumFromDaring)]
 #[allow(dead_code)]
 enum Direction {
     Up(DirectionUp),
