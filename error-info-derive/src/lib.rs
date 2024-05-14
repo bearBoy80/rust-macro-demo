@@ -1,9 +1,17 @@
+mod erro_info;
 mod enum_from_daring;
 use enum_from_daring::process_from_daring;
+use erro_info::process_error_info;
 use proc_macro::TokenStream;
-use quote::quote;
 use syn::DeriveInput;
-#[proc_macro_derive(EnumFrom)]
+use quote::quote;
+
+#[proc_macro_derive(ToErrorInfo, attributes(error_info))]
+pub fn derive_enum_to_error_info(input: TokenStream) -> TokenStream {
+    let input = syn::parse_macro_input!(input as syn::DeriveInput);
+    process_error_info(input).into()
+}
+#[proc_macro_derive(EnumFrom,attributes(error_info))]
 pub fn derive_enum_from(input: TokenStream) -> TokenStream {
     //将enum token转换成语法树
     let input = syn::parse_macro_input!(input as DeriveInput);
